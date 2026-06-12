@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Puney Chawla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --page:      #F8F8F6;
+    --ink:       #1A1A1A;
+    --muted:     #6B6B6B;
+    --light:     #C0C0BB;
+    --rule:      #E0E0DB;
+    --link:      #1C3FA8;
+    --navy:      #1B2A4A;
+    --navy-dim:  rgba(27,42,74,0.06);
+    --navy-rule: rgba(27,42,74,0.12);
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0 0;
+    margin-bottom: 80px;
+  }
+  .nav-name {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; color: var(--muted);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  section { margin-bottom: 72px; }
+  .rule { border: none; border-top: 1px solid var(--rule); margin-bottom: 72px; }
+
+  /* HERO */
+  .hero { padding-top: 24px; }
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: 48px; font-weight: 400;
+    letter-spacing: -1.5px; line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .hero-role { font-size: 16px; color: var(--muted); margin-bottom: 20px; }
+  .hero-bio {
+    font-size: 17px; line-height: 1.75;
+    color: var(--ink); max-width: 560px; margin-bottom: 32px;
+  }
+  .hero-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .hero-links a {
+    font-size: 14px; color: var(--link); text-decoration: none;
+    border-bottom: 1px solid transparent; transition: border-color 0.15s;
+  }
+  .hero-links a:hover { border-bottom-color: var(--link); }
+
+  .section-label {
+    font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--light); margin-bottom: 28px;
+  }
+
+  /* ABOUT */
+  .about-body { font-size: 16px; line-height: 1.8; color: var(--ink); }
+  .about-body p + p { margin-top: 16px; }
+  .interests { margin-top: 28px; font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 40px; }
+  .exp-item { display: grid; grid-template-columns: 140px 1fr; gap: 24px; }
+  .exp-meta { padding-top: 2px; }
+  .exp-period { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .exp-role { font-size: 16px; font-weight: 500; margin-bottom: 2px; line-height: 1.4; }
+  .exp-company { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+  .exp-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
+  .exp-highlights { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+  .exp-highlights li {
+    font-size: 13px; color: var(--muted); list-style: none;
+    padding-left: 14px; position: relative; line-height: 1.6;
+  }
+  .exp-highlights li::before { content: '–'; position: absolute; left: 0; color: var(--light); }
+
+  /* PORTFOLIO — card grid */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .portfolio-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.2s, background 0.2s;
+    min-height: 90px;
+  }
+  .portfolio-card:hover {
+    border-color: var(--navy-rule);
+    background: var(--navy-dim);
+  }
+  .portfolio-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .portfolio-card-name {
+    font-size: 14px; font-weight: 500; line-height: 1.3;
+  }
+  .portfolio-card-arrow {
+    font-size: 13px; color: var(--light);
+    flex-shrink: 0; transition: color 0.2s;
+  }
+  .portfolio-card:hover .portfolio-card-arrow { color: var(--link); }
+  .portfolio-card-desc {
+    font-size: 12px; color: var(--muted); line-height: 1.5;
+  }
+  .portfolio-card-cat {
+    margin-top: 10px;
+    font-size: 11px; color: var(--light);
+    text-transform: uppercase; letter-spacing: 0.6px;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .project-card {
+    padding: 24px; border: 1px solid var(--rule);
+    border-radius: 6px; text-decoration: none; color: var(--ink);
+    display: block; transition: border-color 0.2s;
+  }
+  .project-card:hover { border-color: var(--light); }
+  .project-card-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .project-card-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .project-card-tag {
+    display: inline-block; margin-top: 14px;
+    font-size: 11px; color: var(--light);
+    text-transform: uppercase; letter-spacing: 0.8px;
+  }
+
+  /* AI PROJECTS */
+  .ai-list { display: flex; flex-direction: column; gap: 0; }
+  .ai-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ai-item:first-child { border-top: 1px solid var(--rule); }
+  .ai-item-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .ai-item-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .ai-item-actions {
+    display: flex; flex-direction: column;
+    gap: 6px; align-items: flex-end;
+    padding-top: 2px; flex-shrink: 0;
+  }
+  .ai-link {
+    font-size: 12px; color: var(--link); text-decoration: none;
+    white-space: nowrap; border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .ai-link:hover { border-bottom-color: var(--link); }
+  .ai-placeholder-text { font-size: 12px; color: var(--light); white-space: nowrap; }
+
+  /* GAMES */
+  .games-list { display: flex; flex-direction: column; gap: 0; }
+  .game-item {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 24px; align-items: start;
+    padding: 20px 0; border-bottom: 1px solid var(--rule);
+  }
+  .game-item:first-child { border-top: 1px solid var(--rule); }
+  .game-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .game-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .game-year { font-size: 12px; color: var(--light); padding-top: 2px; white-space: nowrap; }
+
+  /* STOCKS */
+  .stocks-intro { font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 540px; margin-bottom: 28px; }
+  .research-note {
+    border: 1px solid var(--navy-rule);
+    border-radius: 6px; overflow: hidden;
+    background: var(--navy-dim);
+    margin-bottom: 20px;
+  }
+  .research-note-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--navy-rule);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  }
+  .research-note-title { font-size: 14px; font-weight: 500; color: var(--navy); }
+  .research-note-date { font-size: 12px; color: var(--light); white-space: nowrap; }
+  .research-note-body { padding: 16px 20px; }
+  .research-note-summary { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+  .research-tiers { display: flex; flex-direction: column; gap: 10px; }
+  .research-tier { display: flex; gap: 12px; align-items: baseline; }
+  .tier-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.8px; white-space: nowrap; padding-top: 1px; min-width: 76px;
+  }
+  .tier-buy   { color: #2a7a4b; }
+  .tier-wait  { color: #7a6020; }
+  .tier-avoid { color: #8b2a2a; }
+  .tier-stocks { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* Download button — separate from inline links */
+  .download-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px;
+    padding: 9px 16px;
+    border: 1px solid var(--navy-rule);
+    border-radius: 5px;
+    background: var(--navy-dim);
+    color: var(--navy);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .download-btn:hover { background: rgba(27,42,74,0.11); border-color: rgba(27,42,74,0.22); }
+
+  .stocks-social { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
+  .stocks-social a {
+    font-size: 14px; color: var(--link); text-decoration: none;
+    border-bottom: 1px solid transparent; transition: border-color 0.15s;
+  }
+  .stocks-social a:hover { border-bottom-color: var(--link); }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 0 56px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 13px; color: var(--light); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .footer-links a:hover { color: var(--ink); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 20px; }
+    nav { margin-bottom: 56px; }
+    .nav-links { gap: 16px; }
+    .hero h1 { font-size: 36px; }
+    .exp-item { grid-template-columns: 1fr; gap: 6px; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .ai-item { grid-template-columns: 1fr; }
+    .ai-item-actions { flex-direction: row; align-items: center; }
+    footer { flex-direction: column; padding: 32px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Puney Chawla</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#ai">AI Projects</a></li>
+    <li><a href="#research">Research</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Product<br/>Manager.</h1>
+  <p class="hero-role">Currently at Cleartrip &nbsp;·&nbsp; Bengaluru, India</p>
+  <p class="hero-bio">
+    I build products that turn user problems into numbers that move. 
+    Worked across fintech, travel, SaaS, and creator tools — 
+    mostly at startups, always close to the problem.
+  </p>
+  <div class="hero-links">
+    <a href="https://www.linkedin.com/in/puney/" target="_blank">LinkedIn ↗</a>
+    <a href="https://twitter.com/ChawlaPuney" target="_blank">Twitter ↗</a>
+    <a href="https://drive.google.com/file/d/1NuOJA99lM2ogZsYa3U-S8XWtsUb3kwMt/preview" target="_blank">Resume ↗</a>
+    <a href="mailto:puneychawla@gmail.com">Email</a>
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-body">
+    <p>
+      Professionally they call me a product manager, but I think of it differently: 
+      I'm a parent to my metrics. My job is to watch them grow.
+    </p>
+    <p>
+      I'm an Electrical and Electronics engineer from BITS Pilani (early graduation, minor in Finance) 
+      who found his way into product and hasn't looked back. I've built across onboarding, 
+      retention, fraud, KYC, loyalty, and SaaS — mostly at startups where you own the outcome, not just the spec.
+    </p>
+    <p>
+      Outside work I'm a national chess player, an aviation geek, an occasional photographer, 
+      and someone who checks his stock portfolio a little too often.
+    </p>
+  </div>
+  <p class="interests">Interests: Chess &nbsp;·&nbsp; Aviation &nbsp;·&nbsp; Investing &nbsp;·&nbsp; Badminton &nbsp;·&nbsp; Photography &nbsp;·&nbsp; Travel &nbsp;·&nbsp; Running</p>
+</section>
+
+<hr class="rule"/>
+
+<!-- EXPERIENCE -->
+<section id="work">
+  <div class="section-label">Experience</div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta"><div class="exp-period">Dec 2024 – Present</div></div>
+      <div>
+        <div class="exp-role">Product Manager</div>
+        <div class="exp-company">Cleartrip</div>
+        <ul class="exp-highlights">
+          <li>Loyalty program — SuperCoin flywheel, partner brand integrations, repeat purchase mechanics.</li>
+          <li>Top-of-funnel revamp — search retention, funnel tracking, conversion optimisation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta"><div class="exp-period">Jul 2022 – Dec 2024</div></div>
+      <div>
+        <div class="exp-role">Product Manager</div>
+        <div class="exp-company">OneCard</div>
+        <ul class="exp-highlights">
+          <li>Onboarding — WebView KYC, VKYC, premium user flows.</li>
+          <li>Retention — selective risk reduction flow for at-risk customers.</li>
+          <li>Risk &amp; Fraud — identity fraud detection, authentication workflows.</li>
+          <li>Customer experience — query management system, help section with intent identification, AI VoiceBot.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta"><div class="exp-period">Jul 2021 – Dec 2021</div></div>
+      <div>
+        <div class="exp-role">Product Management Intern</div>
+        <div class="exp-company">Zluri</div>
+        <ul class="exp-highlights">
+          <li>SaaS spend visibility — UX to discover, view and optimise SaaS expenditure and shadow IT.</li>
+          <li>Employee lifecycle — one-click onboarding and offboarding workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta"><div class="exp-period">Jun 2020 – Jun 2021</div></div>
+      <div>
+        <div class="exp-role">Founder</div>
+        <div class="exp-company">Laven</div>
+        <div class="exp-desc">No-code merch platform for influencers. Any creator could go live with their own store in under 5 days.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta"><div class="exp-period">2019 – 2021</div></div>
+      <div>
+        <div class="exp-role">Earlier roles</div>
+        <div class="exp-company">LifeClass · Kalam Labs</div>
+        <div class="exp-desc">Career trajectory mapping at LifeClass; AR-based science education at Kalam Labs.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-label">Portfolio — Product Decks</div>
+  <div class="portfolio-grid">
+
+    <a href="https://drive.google.com/file/d/19HxqVWIO8gA4lIgpoORAT6uy9qvLnQV6/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">OneCard</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Onboarding, KYC, and retention mechanics</div>
+      <div class="portfolio-card-cat">FinTech</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1KEMBoZg5e-5mPthzAgEf4dEABDgPJ_Q3/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Google Pay</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">UPI and payments strategy in India</div>
+      <div class="portfolio-card-cat">FinTech</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1DVIoZ-y2hpI6l51ndo60RVq8sHnliDAt/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Groww</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Investing product teardown</div>
+      <div class="portfolio-card-cat">FinTech</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1gx3gR_5PFu95mLN0vq3sZ5ca0xsQZliw/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">CoinSwitch</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Crypto and Web3 positioning</div>
+      <div class="portfolio-card-cat">FinTech · Web3</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1C6uTuk3Bluo5C_M27bprUk7NpLkgcnt9/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Zepto</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">10-minute delivery, dark store ops, retention</div>
+      <div class="portfolio-card-cat">Quick Commerce</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1_1zmQzVDTp2qte0NcF6Ab_Htk1FMqzVn/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Flipkart BBD</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Sale event gamification and conversion</div>
+      <div class="portfolio-card-cat">E-Commerce</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/14KY9sB7z4Os-B1xuB7Y4SWn1nz3891O8/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Spotify</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Discovery engine and social listening</div>
+      <div class="portfolio-card-cat">Entertainment</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1YIm1LdKbWhScK2STkwREV0MpfGFbCmLo/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Curiosity Gap</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">How information gaps drive user engagement</div>
+      <div class="portfolio-card-cat">Psychology</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1VF0cT1sYM30FXu52mSgo1hgeROIN9noW/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Unacademy</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">EdTech product analysis</div>
+      <div class="portfolio-card-cat">EdTech</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1V288cG8pgWa7CxbqTTZ0u4CTtO-S3bxP/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">A23 Games</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Gaming platform teardown</div>
+      <div class="portfolio-card-cat">Gaming</div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1DkYlgwCEubkRYSjf1vcvjIjvG0xai0zx/preview" target="_blank" class="portfolio-card">
+      <div class="portfolio-card-top">
+        <span class="portfolio-card-name">Apna</span>
+        <span class="portfolio-card-arrow">↗</span>
+      </div>
+      <div class="portfolio-card-desc">Hiring and upskilling for blue-collar workers</div>
+      <div class="portfolio-card-cat">HRTech</div>
+    </a>
+
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects — Built by me</div>
+  <div class="projects-grid">
+
+    <a href="https://puneychawla.github.io/laven/" target="_blank" class="project-card">
+      <div class="project-card-name">Laven</div>
+      <div class="project-card-desc">No-code merch store for influencers. Any creator live in under 5 days.</div>
+      <span class="project-card-tag">Startup · 2020</span>
+    </a>
+
+    <a href="https://puneychawla.github.io/evenntly/" target="_blank" class="project-card">
+      <div class="project-card-name">Evenntly</div>
+      <div class="project-card-desc">Event discovery and booking with social proof and personalisation.</div>
+      <span class="project-card-tag">Concept · 2021</span>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1MBJGJwprsa85SgCc6vT7QGRxs1Eh8HUN/preview" target="_blank" class="project-card">
+      <div class="project-card-name">Gas Billing Automation</div>
+      <div class="project-card-desc">Computer vision system for self-generating household gas bills — built during COVID.</div>
+      <span class="project-card-tag">Project · 2020</span>
+    </a>
+
+    <a href="https://puneychawla.github.io/bits-iot-project/" target="_blank" class="project-card">
+      <div class="project-card-name">Pollution Monitor</div>
+      <div class="project-card-desc">Drone-based IoT system to monitor city-level pollution and relay data to the cloud.</div>
+      <span class="project-card-tag">IoT · 2021</span>
+    </a>
+
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<!-- AI PROJECTS -->
+<section id="ai">
+  <div class="section-label">AI Projects</div>
+  <div class="ai-list">
+
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-name">Aero-Watch</div>
+        <div class="ai-item-desc">A command room for airline disruption decisions. Helps operations teams see the whole problem faster — risk ranking, fleet and crew availability, airport constraints, and audit trail — so they move from reacting late to deciding early.</div>
+      </div>
+      <div class="ai-item-actions">
+        <a href="https://puneychawla.github.io/aero-watch/" target="_blank" class="ai-link">Demo ↗</a>
+        <a href="aero-watch.pdf" download class="ai-link">Deck ↓</a>
+      </div>
+    </div>
+
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-name">loop.</div>
+        <div class="ai-item-desc">Trust-layered social travel and credit card network. Borrow card benefits through your 2nd-degree friend network, share airport cabs, get visa intel from friends-of-friends. 30 Indian cards, full flight search, best deal engine. "Your network is your best deal."</div>
+      </div>
+      <div class="ai-item-actions">
+        <a href="https://puneychawla.github.io/loop" target="_blank" class="ai-link">Demo ↗</a>
+        <a href="loop.pdf" download class="ai-link">Deck ↓</a>
+      </div>
+    </div>
+
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-name">Fundwise</div>
+        <div class="ai-item-desc">Smart mutual fund suggestion platform. Portfolio health score, overlap detection, daily NAV-based buy/exit signals with exact rupee amounts, WhatsApp notification CTAs. Single-file React prototype, no backend.</div>
+      </div>
+      <div class="ai-item-actions">
+        <a href="https://puneychawla.github.io/fundwise" target="_blank" class="ai-link">Demo ↗</a>
+        <a href="fundwise.pdf" download class="ai-link">Deck ↓</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<!-- GAMES -->
+<section id="games">
+  <div class="section-label">Games</div>
+  <div class="games-list">
+
+    <div class="game-item">
+      <div>
+        <div class="game-name"><a href="https://puneychawla.github.io/flagle/" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);transition:border-color 0.15s;">Flagle ↗</a></div>
+        <div class="game-desc">Wordle-style daily flag guessing game. 195 countries, 6 attempts — flag covered by tiles that reveal one per wrong guess. Includes a Hard mode with 5 guesses and a pre-revealed tile.</div>
+      </div>
+      <div class="game-year">2026</div>
+    </div>
+
+    <div class="game-item">
+      <div>
+        <div class="game-name"><a href="https://puneychawla.github.io/airportle/" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);transition:border-color 0.15s;">Airportle ↗</a></div>
+        <div class="game-desc">Guess the 3-letter IATA airport code in 6 tries, Wordle-style. Top 100 world airports, colour-coded keyboard, city image reveal on completion. Has an India-only variant with 95 Indian airport codes.</div>
+      </div>
+      <div class="game-year">2026</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<!-- STOCKS -->
+<section id="research">
+  <div class="section-label">Stock Market Research</div>
+  <p class="stocks-intro">
+    I do deep dives into Indian equities — reading annual reports, tracking sector tailwinds, 
+    and separating genuine recovery plays from value traps. Here's a snapshot of my latest research.
+  </p>
+
+  <div class="research-note">
+    <div class="research-note-header">
+      <span class="research-note-title">Indian Equities — Beaten-Down Stocks vs. Value Traps</span>
+      <span class="research-note-date">June 2026</span>
+    </div>
+    <div class="research-note-body">
+      <p class="research-note-summary">
+        The 2026 correction has split the market into two distinct buckets: cyclically beaten-down names
+        where the thesis is intact and the price has overshot, versus structurally impaired stories where cheap is a trap.
+        The dominant macro variable is the Iran ceasefire — nearly every crude-sensitive thesis
+        (OMCs, aviation, paints, autos) is conditional on it holding.
+      </p>
+      <div class="research-tiers">
+        <div class="research-tier">
+          <span class="tier-label tier-buy">Accumulate</span>
+          <span class="tier-stocks">OMCs (HPCL / BPCL / IOC) as crude falls · HDFC Bank &amp; ICICI Bank on NIM trough · Coforge in IT · L&T, UltraTech, Hindalco as quality cyclicals</span>
+        </div>
+        <div class="research-tier">
+          <span class="tier-label tier-wait">Watch</span>
+          <span class="tier-stocks">IndiGo once forex noise clears · Reliance ahead of Jio IPO · M&M as best auto pick · Titan, Sun Pharma, Motherson</span>
+        </div>
+        <div class="research-tier">
+          <span class="tier-label tier-avoid">Avoid</span>
+          <span class="tier-stocks">IndusInd Bank (PwC-confirmed ₹1,817Cr overstatement) · SpiceJet (negative net worth) · Asian Paints (Birla Opus at 6.8% share) · Tata Motors near-term</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="stock-research-june2026.pdf" download class="download-btn">
+    ↓ &nbsp;Download full report (PDF)
+  </a>
+
+  <div class="stocks-social">
+    <a href="https://twitter.com/ChawlaPuney" target="_blank">Follow on X ↗</a>
+    <a href="https://www.linkedin.com/in/puney/" target="_blank">LinkedIn ↗</a>
+    <a href="mailto:puneychawla@gmail.com">Get in touch</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Puney Chawla</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/puney/" target="_blank">LinkedIn</a>
+    <a href="https://twitter.com/ChawlaPuney" target="_blank">Twitter</a>
+    <a href="https://github.com/puneychawla" target="_blank">GitHub</a>
+    <a href="mailto:puneychawla@gmail.com">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>
