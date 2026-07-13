@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cheap AI Was a Phase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F8F6;
+    --paper:#FFFFFF;
+    --navy:#1B2A4A;
+    --navy-soft:#EAECF1;
+    --ink:#2A2E35;
+    --muted:#6B7280;
+    --faint:#9AA0AB;
+    --line:#E4E3DD;
+    --line-2:#D6D5CE;
+    --water:#356B7A;
+    --water-soft:#E4EEF0;
+    --rust:#9E4A34;
+    --rust-soft:#F3E7E2;
+    --maxtext:700px;
+    --maxwide:960px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:18px;line-height:1.68;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxwide);margin:0 auto;padding:0 26px}
+  .col{max-width:var(--maxtext);margin-left:auto;margin-right:auto}
+  h1,h2,h3,h4{font-family:'Lora',Georgia,serif;color:var(--navy);font-weight:600;line-height:1.18}
+  h1{font-size:clamp(34px,5.4vw,54px);font-weight:700;letter-spacing:-.01em;line-height:1.08}
+  h2{font-size:28px;margin:0 0 .5em;letter-spacing:-.005em}
+  h3{font-size:20px;margin:2em 0 .5em}
+  p{margin:0 0 1.2em}
+  a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:2px}
+  a:hover{text-decoration-color:var(--navy)}
+  em{font-style:italic}
+  strong{font-weight:600;color:var(--navy)}
+
+  /* masthead */
+  header.top{border-bottom:1px solid var(--line);background:var(--bg)}
+  .top .wrap{max-width:var(--maxtext);display:flex;justify-content:space-between;align-items:baseline;padding-top:22px;padding-bottom:22px}
+  .brand{font-family:'Lora',serif;font-weight:600;color:var(--navy);font-size:17px;text-decoration:none}
+  .brand .dot{color:var(--rust)}
+  .top nav{font-size:13.5px;color:var(--muted)}
+
+  /* title block */
+  .titleblock{padding:56px 0 8px}
+  .kicker{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:20px}
+  .titleblock h1{max-width:16ch}
+  .standfirst{font-family:'Lora',serif;font-size:22px;line-height:1.5;color:var(--navy);font-style:italic;margin:24px 0 26px;font-weight:400;max-width:44ch}
+  .byline{font-size:13.5px;color:var(--faint);border-top:1px solid var(--line);padding-top:16px;display:flex;gap:18px;flex-wrap:wrap}
+  .byline b{color:var(--muted);font-weight:600}
+
+  /* tldr */
+  .tldr{background:var(--paper);border:1px solid var(--line-2);border-radius:3px;padding:26px 30px 24px;margin:34px auto 10px;max-width:var(--maxtext);box-shadow:0 1px 2px rgba(27,42,74,.04)}
+  .tldr .lab{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-bottom:14px}
+  .tldr ul{margin:0;padding:0;list-style:none}
+  .tldr li{position:relative;padding-left:22px;margin-bottom:12px;font-size:16.5px;line-height:1.55;color:var(--ink)}
+  .tldr li:last-child{margin-bottom:0}
+  .tldr li:before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;background:var(--rust);border-radius:50%}
+
+  section{padding:8px 0}
+  .sectag{font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:44px 0 8px}
+
+  /* figures */
+  figure{margin:38px auto;max-width:var(--maxwide)}
+  figure svg{display:block;width:100%;height:auto;background:var(--paper);border:1px solid var(--line);border-radius:3px}
+  figcaption{font-size:14px;color:var(--muted);margin-top:12px;line-height:1.55;max-width:var(--maxtext);margin-left:auto;margin-right:auto}
+  figcaption b{color:var(--navy);font-weight:600}
+
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-2);border:1px solid var(--line-2);border-radius:3px;overflow:hidden;margin:32px auto;max-width:var(--maxwide)}
+  .stats .s{background:var(--paper);padding:22px 20px}
+  .stats .n{font-family:'Lora',serif;font-weight:700;font-size:28px;color:var(--navy);line-height:1}
+  .stats .n small{font-size:16px;font-weight:600}
+  .stats .l{font-size:13px;color:var(--muted);margin-top:9px;line-height:1.4}
+
+  /* pullquote */
+  blockquote{margin:34px auto;max-width:var(--maxtext);border-left:3px solid var(--navy);padding:6px 0 6px 24px}
+  blockquote p{font-family:'Lora',serif;font-style:italic;font-size:22px;line-height:1.42;color:var(--navy);margin:0}
+  blockquote cite{display:block;font-family:'Inter',sans-serif;font-style:normal;font-size:13.5px;color:var(--muted);margin-top:12px}
+
+  /* two-col possible/not */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-2);border-radius:3px;overflow:hidden;margin:30px auto;max-width:var(--maxwide);background:var(--paper)}
+  .split .h{padding:16px 24px;font-family:'Lora',serif;font-weight:600;font-size:17px;border-bottom:1px solid var(--line)}
+  .split .yes .h{color:var(--water);background:var(--water-soft)}
+  .split .no .h{color:var(--rust);background:var(--rust-soft)}
+  .split .yes{border-right:1px solid var(--line-2)}
+  .split .body{padding:20px 24px 22px}
+  .split .item{margin-bottom:16px}
+  .split .item:last-child{margin-bottom:0}
+  .split .item b{display:block;font-family:'Lora',serif;font-size:16px;color:var(--navy);margin-bottom:2px}
+  .split .item span{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+  hr.r{border:none;border-top:1px solid var(--line);max-width:var(--maxtext);margin:44px auto}
+
+  footer{border-top:1px solid var(--line-2);margin-top:56px;padding:38px 0 60px;background:var(--bg)}
+  footer .wrap{max-width:var(--maxtext)}
+  footer h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:'Inter',sans-serif;font-weight:700;margin:0 0 16px}
+  footer ol{margin:0;padding-left:20px;font-size:14px;line-height:1.7;color:var(--muted)}
+  footer ol a{color:var(--navy)}
+  footer .note{font-size:13px;color:var(--faint);font-style:italic;margin-top:24px;line-height:1.6}
+
+  @media(max-width:760px){
+    body{font-size:17px}
+    .stats{grid-template-columns:1fr 1fr}
+    .split{grid-template-columns:1fr}
+    .split .yes{border-right:none;border-bottom:1px solid var(--line-2)}
+    .standfirst{font-size:20px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Puney Chawla<span class="dot"></span></a>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="col titleblock">
+  <div class="kicker">Rethought way of compute</div>
+  <h1>The Cost of "Free" AI Search</h1>
+  <p class="standfirst">Chips are scarce, the power and water bills are showing up, and running models has started costing more than the people it replaced. Here is what changed, and a different way to run models on the compute we already have.</p>
+  <div class="byline"><span><b>Puney Chawla</b></span><span>July 2026</span><span>~11 min read</span></div>
+</div>
+</div>
+
+<div class="tldr">
+  <div class="lab">tl;dr</div>
+  <ul>
+    <li>Apple just raised Mac and iPad prices by as much as 20 percent or $500, and pinned it on AI's hunger for memory chips. iPhone hikes are expected this autumn. Memory prices roughly doubled in a single quarter.</li>
+    <li>The cost never vanished, it moved. Power grids are strained, AI data centres drink a startling amount of water, and by early 2026 several companies found that running AI was pricier than the staff they had cut. A few started hiring people back.</li>
+    <li>All of this is what happens when the subsidies thin out and the hype stops paying the bill. At that point someone has to cover the real cost of a single query.</li>
+    <li>The idea I want to lay out: rather than pour hundreds of billions into new mega-centres, let model owners ship sealed, packaged versions of their own models to run on GPUs that already exist and sit idle most of the day. Not every model needs the internet or a giant facility. Text to speech, image generation, embeddings and translation all run fine this way.</li>
+    <li>It does not work for everything, and it hinges on two hard things: keeping the model's weights safe on a stranger's machine, and routing each job to the right box. Both are solvable today, if imperfectly.</li>
+  </ul>
+</div>
+
+<div class="wrap"><div class="col">
+
+<section>
+  <p style="font-size:20px;line-height:1.6;color:var(--navy)">On the 25th of June, Apple did something it had spent two years avoiding. It raised prices.</p>
+  <p>Macs and iPads went up by as much as $500, with plenty of models landing north of a 20 percent bump. The entry MacBook Neo, the cheap one Apple had just launched to fight Chromebooks, jumped from $599 to $699. The base MacBook Air moved from $1,099 to $1,299. Tim Cook, on his way out the door as CEO, told the Wall Street Journal he had never seen anything like it in forty years and compared the memory market to a "hundred-year flood." The company kept iPhone prices flat for now, but every analyst covering it expects the autumn iPhone to carry the increase instead.</p>
+  <p>The reason is not tariffs and it is not greed. It is memory. DRAM prices climbed somewhere between 90 and 98 percent in the first quarter of 2026 alone, with another 50 to 60 percent expected in the quarter after. The thing eating all that memory is AI infrastructure. Training and serving large models needs enormous quantities of high bandwidth memory and storage, and the data centre buildout has vacuumed up supply faster than the fabs can respond. Apple, Samsung, Google and everyone else buying the same chips are now bidding against hyperscalers for parts. Consumers get the bill.</p>
+  <p>This is the first receipt to arrive in the mail. It will not be the last, and the more interesting receipts are the ones nobody put a price sticker on yet.</p>
+</section>
+
+<div class="stats">
+  <div class="s"><div class="n">~90<small>%+</small></div><div class="l">DRAM price jump in Q1 2026, quarter on quarter</div></div>
+  <div class="s"><div class="n">$500</div><div class="l">Top of Apple's Mac and iPad price hikes, June 2026</div></div>
+  <div class="s"><div class="n">~$690B</div><div class="l">Estimated hyperscaler AI capex for 2026</div></div>
+  <div class="s"><div class="n">~76 GW</div><div class="l">US data centre power draw, up from ~50 GW in 2024</div></div>
+</div>
+
+<section>
+  <p class="sectag">The bill nobody sees</p>
+  <h2>Why an AI data centre drinks so much water</h2>
+  <p>Everyone knows these places burn electricity. Fewer people picture the water. A single large AI facility can pull up to five million gallons a day, which is roughly what a town of fifty thousand people uses. To understand why, you have to look at what a rack of AI chips actually does with the power it draws.</p>
+  <p>Almost all of that electricity ends up as heat. A modern GPU cluster runs far hotter and far denser than the ordinary servers that ran the web for twenty years, and if you let that heat sit, the hardware cooks itself. So it has to be pulled out fast, and the cheapest way to pull heat out of a building at scale is to evaporate water. Cooling towers spray or circulate water across hot coils, the water absorbs the heat, and it evaporates into the air. It works beautifully. The catch is that anywhere from 70 to 85 percent of the water a data centre withdraws this way never comes back. It is gone, into the sky, not returned to the river or the aquifer it came from.</p>
+  <p>Then there is the water you cannot see at all. About half the electricity powering US data centres still comes from fossil-fuel plants, and those plants boil water to spin their turbines. Producing a single kilowatt-hour of electricity consumes something like two gallons of freshwater before it ever reaches a server. For most facilities this indirect draw is actually larger than the water used on site. And the chips themselves arrive thirsty: manufacturing a processor takes thousands of gallons of ultrapure water to rinse the silicon. By the time a GPU answers your question, it has already drunk deeply three times over.</p>
+  <blockquote>
+    <p>US data centres consumed roughly 17.5 billion gallons of water in 2023. That figure could double or quadruple by 2028.</p>
+    <cite>Lawrence Berkeley National Laboratory, via IEEE Spectrum</cite>
+  </blockquote>
+  <p>None of this is catastrophic at the national scale. It is a rounding error against agriculture. The problem is that data centres do not spread themselves out politely. Roughly two-thirds of the US facilities built since 2022 sit in places already short of water, because that is where land is cheap and power is available. When a fifty megawatt centre lands in a dry county in Arizona or Texas and starts drawing a couple of million gallons a day, it competes with the people and farms already living there. That is where the fights start, and where new projects are beginning to stall.</p>
+  <p>There is a fix on the horizon. The newest chips run so hot that evaporative towers cannot keep up anyway, which is pushing operators toward sealed liquid cooling loops that recirculate coolant and lose almost no fresh water. That helps the water story a lot. It does nothing for the electricity or the capital cost. Which brings us to the part where the economics quietly turned upside down.</p>
+</section>
+
+<figure>
+<svg viewBox="0 0 960 380" role="img" aria-label="How heat and water move through an AI data centre">
+  <text x="28" y="34" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" letter-spacing="1.2" fill="#9AA0AB">WHERE THE WATER GOES</text>
+
+  <!-- power in -->
+  <rect x="28" y="150" width="150" height="72" rx="5" fill="#EAECF1" stroke="#1B2A4A" stroke-width="1.3"/>
+  <text x="103" y="180" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="15" fill="#1B2A4A">Electricity in</text>
+  <text x="103" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">~2 gal water</text>
+  <text x="103" y="215" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">per kWh at the plant</text>
+
+  <path d="M180 186 L236 186" stroke="#1B2A4A" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <!-- GPU racks -->
+  <rect x="240" y="140" width="160" height="92" rx="5" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.3"/>
+  <text x="320" y="172" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="15" fill="#1B2A4A">GPU racks</text>
+  <text x="320" y="192" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">dense, very hot</text>
+  <text x="320" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">power becomes heat</text>
+
+  <path d="M400 186 L456 186" stroke="#356B7A" stroke-width="1.6" marker-end="url(#w)"/>
+  <text x="428" y="176" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#356B7A">heat</text>
+
+  <!-- cooling tower -->
+  <rect x="460" y="140" width="160" height="92" rx="5" fill="#E4EEF0" stroke="#356B7A" stroke-width="1.3"/>
+  <text x="540" y="172" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="15" fill="#356B7A">Evaporative</text>
+  <text x="540" y="190" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="15" fill="#356B7A">cooling</text>
+  <text x="540" y="210" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#356B7A">water absorbs heat</text>
+
+  <!-- evaporates up -->
+  <path d="M540 140 L540 96" stroke="#356B7A" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#w)"/>
+  <rect x="452" y="66" width="176" height="30" rx="15" fill="#356B7A"/>
+  <text x="540" y="86" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600" font-size="12" fill="#FFFFFF">70 to 85% evaporates, gone</text>
+
+  <!-- returns small -->
+  <path d="M620 210 L700 210" stroke="#9AA0AB" stroke-width="1.4" marker-end="url(#g)"/>
+  <text x="720" y="206" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">a little returns,</text>
+  <text x="720" y="221" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">warmer and saltier</text>
+
+  <!-- scale line -->
+  <text x="28" y="300" font-family="Lora,serif" font-style="italic" font-size="14.5" fill="#1B2A4A">A large AI centre can use up to 5 million gallons a day, about a town of 50,000.</text>
+  <text x="28" y="326" font-family="Inter,sans-serif" font-size="13" fill="#6B7280">At the other end of the scale, answering 10 to 50 queries uses roughly one bottle of water.</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1B2A4A"/></marker>
+    <marker id="w" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#356B7A"/></marker>
+    <marker id="g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#9AA0AB"/></marker>
+  </defs>
+</svg>
+<figcaption><b>Fig. 1.</b> Nearly all the power a GPU draws turns into heat, and evaporative cooling is the cheap way to remove it. Most of that water is lost to the air. The electricity feeding the racks consumed water too, back at the power plant, which is usually the bigger draw of the two.</figcaption>
+</figure>
+
+<section>
+  <p class="sectag">The math flips</p>
+  <h2>When the model costs more than the person</h2>
+  <p>For two years the pitch was simple. Replace expensive humans with cheap software. Companies believed it and acted on it, cutting staff and pointing at AI as the reason. Then the invoices came in.</p>
+  <p>The line that made the rounds came from an Nvidia executive, Bryan Catanzaro, who put it plainly to Axios: <em>the cost of compute is far beyond the costs of the employees.</em> Coming from someone who sells the chips, that is worth sitting with. Uber's CTO said the company burned its entire 2026 AI budget in four months, with engineers running up API bills between $500 and $2,000 each per month, and admitted they were back to the drawing board. One company, according to Axios, ran up a $500 million bill in a single month after someone forgot to set a usage cap. Microsoft told a division to stop using an AI coding assistant because the bills had become untenable, and has been working to build its own cheaper models to escape the per-token meter.</p>
+  <p>The reason this keeps happening is structural. When you hire a person, the cost is roughly fixed and you know it in advance. When you switch to agentic AI, the cost scales with usage, and usage has a way of exploding once it is free at the point of use inside a company. Goldman found firms overrunning their inference budgets by orders of magnitude. So the thing that was supposed to be a flat, predictable saving turned into a variable bill that nobody modelled, growing with every prompt.</p>
+  <p>Which is why the quiet reversal started. An Orgvue survey found that 55 percent of employers who replaced workers with AI regret it, and some are hiring people back. Other analyses put the share of AI-driven staff cuts that failed to save money even higher. The rehired roles often cost more than they did before, because the person now has to manage and audit the AI too. Nobody is throwing out AI. They are learning what it actually costs to run, and discovering the number is not small.</p>
+</section>
+
+<figure>
+<svg viewBox="0 0 960 300" role="img" aria-label="The loop where AI replaced workers then cost more than they did">
+  <text x="28" y="34" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" letter-spacing="1.2" fill="#9AA0AB">THE LOOP THAT BROKE</text>
+  <g font-family="Lora,serif" font-weight="600" font-size="14" fill="#1B2A4A">
+    <rect x="40" y="90" width="180" height="66" rx="5" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.2"/>
+    <text x="130" y="119" text-anchor="middle">1. Cut staff</text>
+    <text x="130" y="139" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="11.5" fill="#6B7280">swap salary for AI</text>
+
+    <rect x="270" y="90" width="180" height="66" rx="5" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.2"/>
+    <text x="360" y="119" text-anchor="middle">2. Usage explodes</text>
+    <text x="360" y="139" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="11.5" fill="#6B7280">cost scales per token</text>
+
+    <rect x="500" y="90" width="180" height="66" rx="5" fill="#F3E7E2" stroke="#9E4A34" stroke-width="1.2"/>
+    <text x="590" y="119" text-anchor="middle" fill="#9E4A34">3. Bill overruns</text>
+    <text x="590" y="139" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="11.5" fill="#9E4A34">past the old payroll</text>
+
+    <rect x="730" y="90" width="190" height="66" rx="5" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.2"/>
+    <text x="825" y="112" text-anchor="middle">4. Rehire people,</text>
+    <text x="825" y="132" text-anchor="middle">build own models</text>
+  </g>
+  <g stroke="#1B2A4A" stroke-width="1.5" fill="none">
+    <path d="M220 123 L264 123" marker-end="url(#b)"/>
+    <path d="M450 123 L494 123" marker-end="url(#b)"/>
+    <path d="M680 123 L724 123" marker-end="url(#b)"/>
+  </g>
+  <path d="M825 156 C 825 240, 130 240, 130 160" stroke="#9AA0AB" stroke-width="1.4" stroke-dasharray="4 5" fill="none" marker-end="url(#g2)"/>
+  <text x="477" y="262" text-anchor="middle" font-family="Inter,sans-serif" font-style="italic" font-size="13" fill="#6B7280">the promised saving never showed up</text>
+  <defs>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1B2A4A"/></marker>
+    <marker id="g2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#9AA0AB"/></marker>
+  </defs>
+</svg>
+<figcaption><b>Fig. 2.</b> The pattern showing up across Uber, Microsoft, Amazon and others through 2026. The savings assumed a fixed cost. AI gave them a variable one that grew with every use.</figcaption>
+</figure>
+
+<section>
+  <p class="sectag">The scenario</p>
+  <h2>What happens when compute stops being cheap</h2>
+  <p>Right now a lot of AI is cheap because it is being sold below what it costs to make. Labs are burning investor money to win users, cloud providers are eating margin to fill capacity, and the true price of a query is hidden behind free tiers and generous credits. That is a normal phase for a young industry. It does not last.</p>
+  <p>Picture the moment it ends. Growth slows, the land-grab is over, and the pressure shifts from winning users to actually turning a profit on them. Prices drift up to reflect the real cost of power, water, hardware and the depreciation on all those GPUs. AI stops being the thing every company rushes to adopt and becomes a line item that finance interrogates like any other. When adoption is no longer the goal, efficiency is, and the question changes from "can we use more of this" to "what is the cheapest way to run the workloads we actually need."</p>
+  <p>In that world the mega-centre model looks heavy. You have committed billions to buildings that take years to power, sitting in places fighting you over water, running chips that are obsolete in three years. Meanwhile the workload for a huge share of everyday AI, the text to speech, the transcription, the image generation, the search embeddings, does not need a frontier model or a supercomputer. It needs a decent GPU and somewhere to run. And decent GPUs already exist by the million, scattered across homes, studios, small offices and the carcasses of old crypto mining operations, idle most of the day.</p>
+  <p>That gap, between where the compute is concentrated and where it is actually needed, is the opening.</p>
+</section>
+
+<section>
+  <p class="sectag">A different shape</p>
+  <h2>Running models on the compute we already have</h2>
+  <p>The concept is distributed, low cost and scalable. Pool the world's idle GPUs into a network, send work to them, pay the owners for the cycles. The economics are obvious: a graphics card that already exists behind a residential meter, sitting idle, is far cheaper to use at the margin than a new facility you have to build and power from scratch. This part is not new, and a handful of networks are already doing versions of it.</p>
+  <p>The reason it has stayed niche is a problem I keep coming back to. If a random machine on the network claims it ran a big model on your query, the network has no cheap way to know whether it actually did, or whether it quietly swapped in a smaller, worse model and pocketed the difference. And the workaround everyone reaches for, only using open-weight models so it does not matter who runs them, has two holes. There are not that many genuinely strong open models, and the good proprietary ones, the models people actually want, are exactly the ones their owners will never post publicly for anyone to copy.</p>
+  <p>So here is the version I think is worth building instead.</p>
+</section>
+
+<section>
+  <h3>Let the model owners ship their own models, sealed</h3>
+  <p>Flip who is in control. Instead of the network hosting open weights and hoping nobody cheats, the model company itself packages its proprietary model into a sealed, encrypted runtime and ships that to the idle GPUs. The weights never appear in the clear on the operator's machine. The GPU runs the model inside a protected enclave, produces the output, and hands it back, without the operator ever being able to read, copy or tamper with what is inside. The hardware for this exists today: modern GPUs and CPUs support confidential computing and attestation, which is a way for the chip to cryptographically prove it is running the exact code it was given, untampered, before the owner trusts it with the model.</p>
+  <p>This solves both problems at once. The model owner no longer has to open-source anything to use distributed compute, so their real product stays protected. And the "did they run the right model" question mostly disappears, because the operator never had the ability to substitute a different one in the first place. The owner shipped a sealed box; the box either runs or it does not.</p>
+  <p>Is it a perfect idea? No. Confidential computing shifts trust to the chip vendor rather than removing it, enclaves carry some performance cost, and there is real engineering in packaging a model to run across wildly different consumer hardware. But it turns the hardest objection to distributed AI into something an ordinary company can reason about, and it does not depend on the open-source world producing a model as good as the closed ones.</p>
+  <p>One more point that makes this practical: most models do not need the internet to answer. There is a common assumption that a model must go and scrape the web before every reply. That is only true for a specific class of task. A text to speech model, an image generator, a translator, a transcription model, an embedding model: none of these need live web access. You give them an input, they produce an output, done. That makes them clean, self-contained things to ship to a distant GPU and run in isolation.</p>
+</section>
+
+<figure>
+<svg viewBox="0 0 960 340" role="img" aria-label="Model owner ships a sealed model to idle GPUs">
+  <text x="28" y="34" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" letter-spacing="1.2" fill="#9AA0AB">SEALED MODEL, BORROWED HARDWARE</text>
+
+  <!-- owner -->
+  <rect x="28" y="120" width="176" height="96" rx="5" fill="#EAECF1" stroke="#1B2A4A" stroke-width="1.3"/>
+  <text x="116" y="152" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="15" fill="#1B2A4A">Model owner</text>
+  <text x="116" y="174" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">packages weights into</text>
+  <text x="116" y="190" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">an encrypted, sealed</text>
+  <text x="116" y="206" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">runtime</text>
+
+  <path d="M204 168 L268 168" stroke="#1B2A4A" stroke-width="1.6" marker-end="url(#c)"/>
+  <text x="236" y="158" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#6B7280">ship</text>
+
+  <!-- idle gpus with enclave -->
+  <rect x="272" y="96" width="330" height="150" rx="6" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.3"/>
+  <text x="437" y="122" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="14.5" fill="#1B2A4A">Idle GPU on the network</text>
+  <text x="437" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#9AA0AB">home rig / studio / ex-mining box</text>
+  <!-- enclave -->
+  <rect x="300" y="152" width="274" height="72" rx="5" fill="#E4EEF0" stroke="#356B7A" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="437" y="178" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="13.5" fill="#356B7A">Secure enclave</text>
+  <text x="437" y="197" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#356B7A">model runs here, weights stay encrypted</text>
+  <text x="437" y="213" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#356B7A">operator cannot read or swap it</text>
+
+  <path d="M602 168 L666 168" stroke="#1B2A4A" stroke-width="1.6" marker-end="url(#c)"/>
+  <text x="634" y="158" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" fill="#6B7280">output</text>
+
+  <!-- user -->
+  <rect x="670" y="120" width="176" height="96" rx="5" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.3"/>
+  <text x="758" y="152" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="15" fill="#1B2A4A">User gets answer</text>
+  <text x="758" y="174" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">operator gets paid</text>
+  <text x="758" y="190" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#6B7280">owner keeps the model</text>
+
+  <!-- attestation note -->
+  <text x="437" y="278" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" fill="#6B7280">The chip proves, cryptographically, that it is running the exact sealed code before the owner trusts it.</text>
+  <defs>
+    <marker id="c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1B2A4A"/></marker>
+  </defs>
+</svg>
+<figcaption><b>Fig. 3.</b> The ownership flips. The model company controls the packaging, so it never has to publish its weights, and the operator never gets the chance to substitute a cheaper model. Trust moves onto the hardware, which is a narrower and more manageable thing to trust.</figcaption>
+</figure>
+
+<section>
+  <p class="sectag">The honest boundary</p>
+  <h2>What runs this way, and what does not</h2>
+  <p>This is where a lot of distributed-compute pitches get vague, so let me be specific. The deciding factors are how much memory the model needs, how sensitive it is to latency, and whether it needs live access to fresh data or private context. Sort by those and a clear line appears.</p>
+</section>
+
+<div class="split">
+  <div class="yes">
+    <div class="h">Runs well distributed</div>
+    <div class="body">
+      <div class="item"><b>Text to speech and speech to text</b><span>Self-contained, bounded, no internet needed. A near-perfect fit and a good first workload.</span></div>
+      <div class="item"><b>Image and short video generation</b><span>Heavy but parallel, and tolerant of a second or two of latency.</span></div>
+      <div class="item"><b>Embeddings and reranking</b><span>Cheap, batchable, fits comfortably on a single consumer card.</span></div>
+      <div class="item"><b>Translation and OCR</b><span>Fixed input to fixed output, easy to isolate and ship.</span></div>
+      <div class="item"><b>Small and mid-size language models</b><span>Anything that fits in a single GPU's memory, especially for batch or background jobs.</span></div>
+    </div>
+  </div>
+  <div class="no">
+    <div class="h">Stays central, for now</div>
+    <div class="body">
+      <div class="item"><b>Frontier reasoning models</b><span>Too large for one consumer GPU, and splitting them across distant machines wrecks the latency.</span></div>
+      <div class="item"><b>Anything needing private live data</b><span>If it has to reach into your company's systems mid-answer, the security surface gets ugly fast.</span></div>
+      <div class="item"><b>Ultra low latency, interactive use</b><span>A live back-and-forth voice agent cannot afford the network hop and cold-start delays.</span></div>
+      <div class="item"><b>Very long context work</b><span>Huge context windows need memory bandwidth a scattered network cannot promise.</span></div>
+      <div class="item"><b>Live tool and web use</b><span>Models that call out to search or run code mid-answer want a stable, connected home.</span></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <p>The pattern is that self-contained, latency-tolerant, single-GPU workloads belong on the network, and big, chatty, live, memory-hungry ones stay in the data centre. The good news is that the first group is enormous and boring, which is exactly the kind of steady demand you want to build on. It is a lot of the volume even if it is not the headline.</p>
+</section>
+
+<section>
+  <p class="sectag">The plumbing</p>
+  <h2>How a job finds the right machine</h2>
+  <p>A network of mismatched, unreliable, geographically scattered GPUs is useless without something deciding where each job goes. This is the part that quietly makes or breaks the whole thing, and it is closer to a logistics problem than an AI one.</p>
+  <p>When a request arrives, a scheduler has to answer a short list of questions before it dispatches. Does the box have the right model already loaded, or will it have to cold-start one, which costs seconds. Does it have enough free memory for this job right now. How far away is it from the user, because a request bouncing across the planet adds delay you cannot claw back. Is the box healthy and actually online, not just claiming to be. And does the operator have a track record of finishing jobs rather than dropping them. The scheduler weighs those, picks the best available node, and sends the work. If that node fails or stalls, the job falls back to the next one.</p>
+  <p>The subtle trick is keeping models warm. Loading a large model into a GPU takes time, so a good network keeps the popular models already resident on enough nodes that most requests hit a warm one and skip the wait. That turns a pool of cold, random machines into something that feels responsive, and it is the difference between a demo and a product.</p>
+</section>
+
+<figure>
+<svg viewBox="0 0 960 320" role="img" aria-label="How the scheduler picks a node for a job">
+  <text x="28" y="34" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" letter-spacing="1.2" fill="#9AA0AB">PICKING A NODE</text>
+
+  <rect x="28" y="130" width="140" height="60" rx="5" fill="#EAECF1" stroke="#1B2A4A" stroke-width="1.2"/>
+  <text x="98" y="158" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="14" fill="#1B2A4A">Request in</text>
+  <text x="98" y="176" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">"run TTS on this"</text>
+
+  <path d="M168 160 L216 160" stroke="#1B2A4A" stroke-width="1.6" marker-end="url(#d)"/>
+
+  <rect x="220" y="96" width="200" height="128" rx="6" fill="#FFFFFF" stroke="#1B2A4A" stroke-width="1.3"/>
+  <text x="320" y="122" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="14.5" fill="#1B2A4A">Scheduler checks</text>
+  <g font-family="Inter,sans-serif" font-size="12" fill="#2A2E35">
+    <text x="238" y="146">model loaded / warm?</text>
+    <text x="238" y="166">free memory?</text>
+    <text x="238" y="186">close to the user?</text>
+    <text x="238" y="206">healthy + reliable?</text>
+  </g>
+
+  <!-- candidate nodes -->
+  <g font-family="Inter,sans-serif" font-size="11.5">
+    <path d="M420 140 L486 116" stroke="#9AA0AB" stroke-width="1.3" marker-end="url(#g3)"/>
+    <path d="M420 160 L486 176" stroke="#356B7A" stroke-width="1.8" marker-end="url(#w2)"/>
+    <path d="M420 180 L486 236" stroke="#9AA0AB" stroke-width="1.3" marker-end="url(#g3)"/>
+
+    <rect x="490" y="96" width="180" height="44" rx="5" fill="#FFFFFF" stroke="#D6D5CE"/>
+    <text x="504" y="114" font-family="Lora,serif" font-weight="600" fill="#9AA0AB">Node A</text>
+    <text x="504" y="130" fill="#9AA0AB">cold, far away</text>
+
+    <rect x="490" y="150" width="180" height="44" rx="5" fill="#E4EEF0" stroke="#356B7A" stroke-width="1.4"/>
+    <text x="504" y="168" font-family="Lora,serif" font-weight="600" fill="#356B7A">Node B  ✓ chosen</text>
+    <text x="504" y="184" fill="#356B7A">warm, near, reliable</text>
+
+    <rect x="490" y="204" width="180" height="44" rx="5" fill="#FFFFFF" stroke="#D6D5CE"/>
+    <text x="504" y="222" font-family="Lora,serif" font-weight="600" fill="#9AA0AB">Node C</text>
+    <text x="504" y="238" fill="#9AA0AB">busy, low free memory</text>
+  </g>
+
+  <path d="M670 172 L724 172" stroke="#1B2A4A" stroke-width="1.6" marker-end="url(#d)"/>
+  <rect x="728" y="146" width="150" height="52" rx="5" fill="#1B2A4A"/>
+  <text x="803" y="170" text-anchor="middle" font-family="Lora,serif" font-weight="600" font-size="13.5" fill="#FFFFFF">Dispatch</text>
+  <text x="803" y="187" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#EAECF1">fall back if it stalls</text>
+
+  <defs>
+    <marker id="d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#1B2A4A"/></marker>
+    <marker id="g3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#9AA0AB"/></marker>
+    <marker id="w2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#356B7A"/></marker>
+  </defs>
+</svg>
+<figcaption><b>Fig. 4.</b> Server selection is a ranking, not a lottery. Warm model, free memory, proximity and a good reliability record win the job. Keeping popular models pre-loaded on enough nodes is what makes the whole pool feel fast.</figcaption>
+</figure>
+
+<section>
+  <p class="sectag">So, is it worth building</p>
+  <h2>The case, and the catch</h2>
+  <p>The case is straightforward. There is a mountain of capable hardware already bought, already powered, and doing nothing most of the day. Using it avoids the water fights, the multi-year grid connections and the capital sink of new construction. It is cheaper at the margin for the large, unglamorous slice of AI work that does not need a frontier model. And it gives model owners a way to reach that cheap compute without giving away the thing that makes them money.</p>
+  <p>The catch is real too, and I would rather name it than paper over it. Reliability on consumer hardware is a genuine problem, and a network held together by hobbyists tends to shrink the moment the reward dips below their electricity bill, which couples your supply to incentives you do not fully control. Confidential computing helps with trust but leans on the chip vendors and carries overhead. Latency and cold starts limit what you can serve. And the privacy story only holds if the enclave story holds, which puts a lot of weight on getting that one piece right.</p>
+  <p>What I do not think is true is that this replaces the data centre. The honest shape of it is an overflow layer: the cheap, elastic, latency-tolerant place you send the workloads that do not need to sit in a hyperscaler, wrapped in enough tooling that a developer never has to think about the messy pool of machines underneath. That is a smaller claim than "decentralise AI," and a more useful one.</p>
+  <p>The wider point is the one I opened with. The era where compute was effectively free, where you could throw a frontier model at a problem a small model would have solved and never see the bill, is closing. Apple's price sticker is an early sign of it. The rehiring is another. When the true cost of a query becomes visible, the pressure to run the right-sized model on the cheapest honest hardware is going to be enormous. The compute we already own, used well, is a large part of that answer.</p>
+</section>
+
+</div></div>
+
+<footer>
+  <div class="wrap">
+    <h4>Sources</h4>
+    <ol>
+      <li>Apple price increases and the memory shortage: <a href="https://www.pbs.org/newshour/economy/apple-increases-prices-for-macs-and-ipads-blaming-memory-chip-shortage-fueled-by-ai">PBS NewsHour</a>, <a href="https://www.aljazeera.com/economy/2026/6/26/apple-microsoft-hike-prices-over-surging-chip-costs">Al Jazeera</a>, <a href="https://abcnews.com/Business/tim-cook-prices-apple-devices-jump-amid-memory/story?id=133996174">ABC News</a>, and DRAM figures via TrendForce.</li>
+      <li>AI costing more than employees, and rehiring: <a href="https://fortune.com/2026/04/28/nvidia-executive-cost-of-ai-is-greater-than-cost-of-employees/">Fortune</a>, <a href="https://www.axios.com/2026/04/26/ai-cost-human-workers">Axios</a>, <a href="https://moneywise.com/news/economy/ai-costs-human-workers-companies-rehiring">Moneywise</a> (Orgvue survey), <a href="https://www.forbes.com/sites/jemmagreen/2026/07/02/ai-costs-more-than-the-people-it-replaced/">Forbes</a>.</li>
+      <li>Data centre water and power: <a href="https://spectrum.ieee.org/ai-water-usage">IEEE Spectrum</a> (Lawrence Berkeley National Laboratory data), <a href="https://ampacwatersystems.com/ai-data-centers-water-consumption-crisis-2026/">AMPAC</a>, <a href="https://www.poweroverenergy.org/blog/datacenter-2026">Power Over Energy</a>, <a href="https://www.lincolninst.edu/publications/land-lines-magazine/articles/land-water-impacts-data-centers/">Lincoln Institute</a>.</li>
+      <li>Distributed compute and confidential inference context: work from Bittensor, io.net, Akash, Gensyn and Prime Intellect, and research on trusted-execution and hybrid verification approaches.</li>
+    </ol>
+    <p class="note">Written July 2026. Figures are drawn from the public reporting above and are approximate and fast-moving. This is a technical and market view, not financial advice.</p>
+  </div>
+</footer>
+
+</body>
+</html>
